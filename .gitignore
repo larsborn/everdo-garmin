@@ -5,3 +5,6 @@ bin/
 # screenshot tooling scratch
 store/__pycache__/
 store/.origin
+
+# store package
+bin/Everdo.iq
