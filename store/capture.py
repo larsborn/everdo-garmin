@@ -57,6 +57,41 @@ def grab(hwnd):
     gdi32.DeleteObject(bmp); gdi32.DeleteDC(mdc); user32.ReleaseDC(hwnd, hdc)
     return Image.frombuffer("RGBA", (w, h), buf, "raw", "BGRA", 0, 1).convert("RGB")
 
+class POINT(ctypes.Structure):
+    _fields_ = [("x", wintypes.LONG), ("y", wintypes.LONG)]
+
+def screen_rect(hwnd):
+    """Where the watch screen sits inside a window capture.
+
+    The simulator draws device.png at the client origin 1:1, and
+    simulator.json gives the screen's offset within that image. Deriving
+    the client origin beats hardcoding: the menu bar is non-client area, so
+    the offset is not simply the border width.
+    """
+    import json, os
+    dev = os.path.expandvars(r"%APPDATA%\Garmin\ConnectIQ\Devices")
+    import re
+    # device id from the window title is unreliable; caller passes it
+    raise NotImplementedError
+
+def client_origin(hwnd):
+    pt = POINT(0, 0)
+    user32.ClientToScreen(hwnd, ctypes.byref(pt))
+    r = wintypes.RECT()
+    user32.GetWindowRect(hwnd, ctypes.byref(r))
+    return pt.x - r.left, pt.y - r.top
+
+def grab_screen(hwnd, device="venux1"):
+    """Window capture cropped to exactly the device's screen pixels."""
+    import json, os
+    sj = os.path.join(os.path.expandvars(r"%APPDATA%\Garmin\ConnectIQ\Devices"),
+                      device, "simulator.json")
+    loc = json.load(open(sj, encoding="utf-8"))["display"]["location"]
+    ox, oy = client_origin(hwnd)
+    img = grab(hwnd)
+    x, y = ox + loc["x"], oy + loc["y"]
+    return img.crop((x, y, x + loc["width"], y + loc["height"]))
+
 if __name__ == "__main__":
     wins = find_window()
     if not wins:

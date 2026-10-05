@@ -4,3 +4,4 @@ bin/
 
 # screenshot tooling scratch
 store/__pycache__/
+store/.origin

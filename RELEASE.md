@@ -57,8 +57,31 @@ Api, Config and Errors reference `WatchUi` nowhere. Nothing to reduce.
 - [ ] Offline test: capture with the Everdo box asleep, confirm it queues and
       goes out later unattended
 - [ ] Bad-key test: confirm "check API key" rather than a silent failure
-- [ ] Screenshots from the simulator for the listing
+- [x] Screenshots: store/01..06, 448x486, cropped to the screen
 - [ ] Store listing text (draft below)
+
+## Screenshots
+
+`store/01-ready` .. `06-setup`, each exactly 448x486 - the device's real
+screen pixels, cropped out of the simulator window rather than shipped with
+a bezel around them. Regenerate with `store/capture.py`.
+
+How they were made, because it is not obvious: each state is forced at
+BUILD time by a throwaway `Shot.mc` in a scratch copy of the project,
+which overrides `getInitialView` and seeds Storage. Nothing is clicked.
+Driving the simulator with synthetic keystrokes would type into whatever
+window the user actually has focused.
+
+Two traps when redoing this:
+
+- **An occluded simulator window serves stale frames.** `PrintWindow` and
+  even a forced `RedrawWindow` return whatever it last painted, so you
+  silently capture the previous state. Keep the window visible and verify
+  every image, by hash as well as by eye - two of these came out as
+  byte-identical duplicates.
+- **`MonkeyDoDeux` blocks once the app is actually running** (it exits
+  immediately only when the push fails), so background it or the loop
+  hangs forever.
 
 ## Store listing draft
 
