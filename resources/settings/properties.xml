@@ -1,0 +1,12 @@
+<properties>
+    <!-- The phone-facing surface, edited in the Connect IQ app or Garmin
+         Express. Empty by default so an unconfigured install says so rather
+         than posting somewhere unintended.
+
+         These are NOT where the app reads its config from. Application.
+         Storage is authoritative and these are treated as an inbox from the
+         phone - see source/Config.mc for why, and for the two bugs that
+         design came out of. -->
+    <property id="baseUrl" type="string"></property>
+    <property id="apiKey" type="string"></property>
+</properties>

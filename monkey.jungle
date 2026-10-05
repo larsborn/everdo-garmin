@@ -1,0 +1,71 @@
+project.manifest = manifest.xml
+
+# Launcher icons are per-device-size. Garmin warns and rescales when the
+# bitmap does not match the size a device declares, so instead of one
+# icon stretched 40->70 px there is one folder per declared size and each
+# device points at its own. resources/ carries everything else.
+#
+# Generated - see RELEASE.md. Adding a device means adding its line here.
+
+enduro3.resourcePath = $(base.resourcePath);resources-icon40x40
+fenix7.resourcePath = $(base.resourcePath);resources-icon40x40
+fenix7pro.resourcePath = $(base.resourcePath);resources-icon40x40
+fenix7pronowifi.resourcePath = $(base.resourcePath);resources-icon40x40
+fenix7s.resourcePath = $(base.resourcePath);resources-icon40x40
+fenix7spro.resourcePath = $(base.resourcePath);resources-icon40x40
+fenix7x.resourcePath = $(base.resourcePath);resources-icon40x40
+fenix7xpro.resourcePath = $(base.resourcePath);resources-icon40x40
+fenix7xpronowifi.resourcePath = $(base.resourcePath);resources-icon40x40
+fenix8solar47mm.resourcePath = $(base.resourcePath);resources-icon40x40
+fenix8solar51mm.resourcePath = $(base.resourcePath);resources-icon40x40
+fenix9prosolar47mm.resourcePath = $(base.resourcePath);resources-icon40x40
+fenix9prosolar51mm.resourcePath = $(base.resourcePath);resources-icon40x40
+fr955.resourcePath = $(base.resourcePath);resources-icon40x40
+venusq2.resourcePath = $(base.resourcePath);resources-icon40x40
+venusq2m.resourcePath = $(base.resourcePath);resources-icon40x40
+fr165.resourcePath = $(base.resourcePath);resources-icon54x54
+fr165m.resourcePath = $(base.resourcePath);resources-icon54x54
+fr170.resourcePath = $(base.resourcePath);resources-icon54x54
+fr170m.resourcePath = $(base.resourcePath);resources-icon54x54
+fr57042mm.resourcePath = $(base.resourcePath);resources-icon54x54
+fr70.resourcePath = $(base.resourcePath);resources-icon54x54
+venu441mm.resourcePath = $(base.resourcePath);resources-icon54x54
+vivoactive6.resourcePath = $(base.resourcePath);resources-icon54x54
+approachs50.resourcePath = $(base.resourcePath);resources-icon56x56
+vivoactive5.resourcePath = $(base.resourcePath);resources-icon56x56
+approachs7042mm.resourcePath = $(base.resourcePath);resources-icon60x60
+d2mach1.resourcePath = $(base.resourcePath);resources-icon60x60
+descentg2.resourcePath = $(base.resourcePath);resources-icon60x60
+descentmk343mm.resourcePath = $(base.resourcePath);resources-icon60x60
+descentmk351mm.resourcePath = $(base.resourcePath);resources-icon60x60
+epix2.resourcePath = $(base.resourcePath);resources-icon60x60
+epix2pro42mm.resourcePath = $(base.resourcePath);resources-icon60x60
+epix2pro47mm.resourcePath = $(base.resourcePath);resources-icon60x60
+epix2pro51mm.resourcePath = $(base.resourcePath);resources-icon60x60
+fenix843mm.resourcePath = $(base.resourcePath);resources-icon60x60
+fenix943mm.resourcePath = $(base.resourcePath);resources-icon60x60
+fenix9pro43mm.resourcePath = $(base.resourcePath);resources-icon60x60
+fenixe.resourcePath = $(base.resourcePath);resources-icon60x60
+fr265.resourcePath = $(base.resourcePath);resources-icon60x60
+fr265s.resourcePath = $(base.resourcePath);resources-icon60x60
+marq2.resourcePath = $(base.resourcePath);resources-icon60x60
+marq2aviator.resourcePath = $(base.resourcePath);resources-icon60x60
+venu2s.resourcePath = $(base.resourcePath);resources-icon61x61
+d2mach2.resourcePath = $(base.resourcePath);resources-icon65x65
+d2mach2pro.resourcePath = $(base.resourcePath);resources-icon65x65
+fenix847mm.resourcePath = $(base.resourcePath);resources-icon65x65
+fenix8pro47mm.resourcePath = $(base.resourcePath);resources-icon65x65
+fenix947mm.resourcePath = $(base.resourcePath);resources-icon65x65
+fenix9pro47mm.resourcePath = $(base.resourcePath);resources-icon65x65
+fenix9pro51mm.resourcePath = $(base.resourcePath);resources-icon65x65
+fr57047mm.resourcePath = $(base.resourcePath);resources-icon65x65
+fr965.resourcePath = $(base.resourcePath);resources-icon65x65
+fr970.resourcePath = $(base.resourcePath);resources-icon65x65
+venu445mm.resourcePath = $(base.resourcePath);resources-icon65x65
+venux1.resourcePath = $(base.resourcePath);resources-icon65x65
+approachs7047mm.resourcePath = $(base.resourcePath);resources-icon70x70
+d2airx10.resourcePath = $(base.resourcePath);resources-icon70x70
+venu2.resourcePath = $(base.resourcePath);resources-icon70x70
+venu2plus.resourcePath = $(base.resourcePath);resources-icon70x70
+venu3.resourcePath = $(base.resourcePath);resources-icon70x70
+venu3s.resourcePath = $(base.resourcePath);resources-icon70x70

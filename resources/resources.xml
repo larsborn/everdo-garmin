@@ -1,0 +1,7 @@
+<resources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://developer.garmin.com/downloads/connect-iq/resources.xsd">
+    <!-- LauncherIcon is deliberately NOT here. It lives in the per-size
+         resources-icon<W>x<H>/ folders, one of which every supported device
+         is mapped to in monkey.jungle. Declaring it here as well would be a
+         duplicate resource id. -->
+    <string id="AppName">Everdo</string>
+</resources>

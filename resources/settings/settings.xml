@@ -1,0 +1,8 @@
+<settings>
+    <setting propertyKey="@Properties.baseUrl" title="Base URL">
+        <settingConfig type="alphaNumeric" maxLength="120" />
+    </setting>
+    <setting propertyKey="@Properties.apiKey" title="Everdo API key">
+        <settingConfig type="alphaNumeric" maxLength="120" />
+    </setting>
+</settings>
