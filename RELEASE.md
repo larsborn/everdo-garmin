@@ -106,6 +106,12 @@ Decide it empirically: **if the beta installs from the store and runs, the
 package is fine.** Query it with Garmin developer support before the
 public release, quoting that bug.
 
+**Update:** it did not block. The 1.0.0 beta listing published normally -
+icon, description, screenshots and permissions all resolved, listed at
+24 KB. So the message is advisory at upload time at worst. Still worth
+raising with support before the public release, while an appID change is
+still free.
+
 ## BACK UP THE DEVELOPER KEY
 
 `P:\Garmin\keys\developer_key.der` - off this machine, today.
