@@ -83,7 +83,20 @@ Consequence worth expecting: to a watch this is a different app, so its
 settings and queue start empty. Fine for a v1; it would not be fine for an
 update, which must keep the same appID or every user is silently reset.
 
-Beta appID 4ff5794372e4b497de2180ec12e582f2, uploaded as 1.0.0.
+appID history - keep this straight, it is the one thing that cannot be
+undone:
+
+| appID | Used for |
+| --- | --- |
+| `4ff5794372e4b497de2180ec12e582f2` | sideload during development, and beta 1 |
+| `1eb0645359c890ab0dcc0c49a8a2f5e0` | **beta 2** - clean room, never sideloaded |
+| (to generate) | public release |
+
+Beta 2 exists because beta 1 shared its appID with the sideloaded builds.
+The Connect IQ phone app caches metadata per appID, so the two installs
+became indistinguishable - the app list showed one name and the detail
+page a name from three builds earlier - and the settings-page question
+could not be answered. Never sideload and store-install the same appID.
 
 ## "Signature check failed" on upload
 
