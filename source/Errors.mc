@@ -23,6 +23,13 @@ module Errors {
         if (code < 0) {
             return transport(code);
         }
+        if (code >= 200 && code < 300) {
+            // Should never reach here - a 2xx is success. It did once, when
+            // a flush stopped for a non-error reason and handed its last
+            // response code to this function, putting "unexpected (200)" on
+            // the watch. Cheap to make impossible.
+            return "sent";
+        }
         if (code == 401 || code == 403) {
             return "check API key";
         }

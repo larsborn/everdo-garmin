@@ -36,22 +36,27 @@ class EverdoView extends WatchUi.View {
             return;
         }
 
+        // Headline sits above centre, caption under it, status below that -
+        // spaced off the font heights rather than hand-tuned offsets, which
+        // is what kept crowding the lines together.
         if (depth > 0) {
+            var fh = dc.getFontHeight(Graphics.FONT_NUMBER_MEDIUM);
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(cx, cy - 70, Graphics.FONT_NUMBER_MEDIUM, depth.toString(),
+            dc.drawText(cx, cy - fh, Graphics.FONT_NUMBER_MEDIUM, depth.toString(),
                 Graphics.TEXT_JUSTIFY_CENTER);
-            dc.drawText(cx, cy + 10, Graphics.FONT_XTINY,
+            dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
+            dc.drawText(cx, cy - 6, Graphics.FONT_XTINY,
                 depth == 1 ? "item waiting" : "items waiting",
                 Graphics.TEXT_JUSTIFY_CENTER);
         } else {
             dc.setColor(ACCENT, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(cx, cy - 40, Graphics.FONT_MEDIUM, "Ready",
-                Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(cx, cy - dc.getFontHeight(Graphics.FONT_MEDIUM),
+                Graphics.FONT_MEDIUM, "Ready", Graphics.TEXT_JUSTIFY_CENTER);
         }
 
         if (_status.length() > 0) {
-            dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(cx, cy + 50, Graphics.FONT_XTINY, _status,
+            dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
+            dc.drawText(cx, cy + 34, Graphics.FONT_XTINY, _status,
                 Graphics.TEXT_JUSTIFY_CENTER);
         }
         drawFooter(dc, cx);
@@ -108,22 +113,30 @@ class EverdoView extends WatchUi.View {
         setStatus("sending...");
         var f = new Flusher();
         _flusher = f;
-        f.start(method(:onFlushDone));
+        f.start(method(:onFlushDone), 0);          // foreground: no cut-off
     }
 
     public function onFlushDone(result as Dictionary) as Void {
         _flusher = null;
-        var reason = result["reason"];
+        var r = result["reason"];
+        var reason = (r instanceof Lang.String) ? r as String : "";
         var sent = result["sent"];
         var n = (sent instanceof Lang.Number) ? sent as Number : 0;
 
-        if (reason instanceof Lang.String && (reason as String).equals("empty")) {
+        if (reason.equals("empty")) {
             // Drained. Only say something if this flush actually did work.
-            setStatus(n > 0 ? "sent" : "");
+            setStatus(n > 0 ? (n == 1 ? "sent" : "sent " + n.toString()) : "");
             return;
         }
-        if (reason instanceof Lang.String && (reason as String).equals("unconfigured")) {
+        if (reason.equals("unconfigured")) {
             setStatus("not configured");
+            return;
+        }
+        if (reason.equals("budget")) {
+            // Ran out of time, not an error - whatever is left goes on the
+            // next attempt. Reporting the last response code here is what
+            // produced the nonsense "sent 1, unexpected (200)".
+            setStatus("sent " + n.toString() + ", rest queued");
             return;
         }
 

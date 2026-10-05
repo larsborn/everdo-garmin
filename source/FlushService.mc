@@ -25,7 +25,7 @@ class FlushService extends System.ServiceDelegate {
         }
         var f = new Flusher();
         _flusher = f;
-        f.start(method(:onFlushDone));
+        f.start(method(:onFlushDone), 20000);     // killed at 30 s, leave headroom
     }
 
     //! Background.exit hands this to the app's onBackgroundData, immediately

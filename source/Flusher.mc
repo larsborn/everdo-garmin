@@ -17,10 +17,15 @@ import Toybox.System;
 (:background)
 class Flusher {
 
-    // Stop issuing NEW requests past this point. The background service is
-    // killed at 30 s with no data at all, so we must exit under our own
-    // steam with a result worth reading.
-    private const BUDGET_MS = 20000;
+    // Stop issuing NEW requests past this point. This exists only because a
+    // BACKGROUND service is killed at 30 s with no data at all, so it has to
+    // exit under its own steam with a result worth reading.
+    //
+    // The foreground has no such limit, and applying one there was a bug: a
+    // flush that sent its first item slowly then stopped, leaving the rest
+    // queued and reporting a cut-off as though something had gone wrong.
+    // Callers pass their own budget; 0 means none.
+    private var _budgetMs as Number = 0;
 
     private var _t0 as Number = 0;
     private var _reqAt as Number = 0;
@@ -33,8 +38,9 @@ class Flusher {
     public function initialize() {
     }
 
-    public function start(cb as Method?) as Void {
+    public function start(cb as Method?, budgetMs as Number) as Void {
         _cb = cb;
+        _budgetMs = budgetMs;
         _t0 = System.getTimer();
         _sent = 0;
         _lastCode = 0;
@@ -64,7 +70,7 @@ class Flusher {
             finish("empty");
             return;
         }
-        if (System.getTimer() - _t0 > BUDGET_MS) {
+        if (_budgetMs > 0 && System.getTimer() - _t0 > _budgetMs) {
             finish("budget");
             return;
         }
