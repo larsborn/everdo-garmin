@@ -85,6 +85,38 @@ update, which must keep the same appID or every user is silently reset.
 
 Beta appID 4ff5794372e4b497de2180ec12e582f2, uploaded as 1.0.0.
 
+## "Signature check failed" on upload
+
+Seen on the 1.0.0 beta upload, alongside `Status: Verified` and a correct
+compatible-device list.
+
+What it is NOT:
+- the key is **4096-bit RSA**, so it is not the classic too-short-key cause
+- it is a first upload, so "all versions must be signed with the same key
+  pair" cannot apply in the usual sense
+
+There is a Garmin-acknowledged store-checker bug that emits exactly this
+message, reported Feb 2023, still open. Several developers describe it as
+"a confusing warning, everything works fine". The claimed trigger is the
+integer -507453934 appearing in the app - but that is 0xE1C0DE12, a PRG
+section magic present in every PRG, so the diagnosis is probably
+incomplete.
+
+Decide it empirically: **if the beta installs from the store and runs, the
+package is fine.** Query it with Garmin developer support before the
+public release, quoting that bug.
+
+## BACK UP THE DEVELOPER KEY
+
+`P:\Garmin\keys\developer_key.der` - off this machine, today.
+
+There is **no recovery**. The key is what ties every future update to this
+listing. Lose it and the app can never be updated; the only remedy is a new
+listing, losing installs, ratings and reviews. The usual way people lose it
+is a reinstall or a new machine.
+
+The appID changes between beta and public release. The **key must not**.
+
 ## Screenshots
 
 `store/01-ready` .. `06-setup`, each exactly 448x486 - the device's real
