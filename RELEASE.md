@@ -60,6 +60,31 @@ Api, Config and Errors reference `WatchUi` nowhere. Nothing to reduce.
 - [x] Screenshots: store/01..06, 448x486, cropped to the screen
 - [ ] Store listing text (draft below)
 
+## Beta first, and the appID it costs
+
+The upload form warns that a Beta app is downloadable only by you, and that
+publishing afterwards requires **a different appID in manifest.xml**.
+
+Pay it. Nobody has installed this, there are no reviews or install counts
+attached, and the appID is a UUID. What Beta buys is the only test
+sideloading cannot give: whether a STORE-installed app gets a working
+settings page in the Connect IQ phone app. The whole Storage-vs-Properties
+design assumes it does, and that has never been observed - sideloaded apps
+do not reliably appear there at all.
+
+To publish after the beta:
+
+1. `openssl rand -hex 16` for a new id (lowercase, matching house style)
+2. Update **both** `manifest.xml` (`id=`) and `.appid`
+3. `./buildall.sh` then `./package.sh`
+4. Upload the new .iq without the Beta box ticked
+
+Consequence worth expecting: to a watch this is a different app, so its
+settings and queue start empty. Fine for a v1; it would not be fine for an
+update, which must keep the same appID or every user is silently reset.
+
+Beta appID 4ff5794372e4b497de2180ec12e582f2, uploaded as 1.0.0.
+
 ## Screenshots
 
 `store/01-ready` .. `06-setup`, each exactly 448x486 - the device's real
