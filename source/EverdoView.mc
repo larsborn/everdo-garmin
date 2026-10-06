@@ -12,9 +12,32 @@ class EverdoView extends WatchUi.View {
     // cannot start while one is in flight.
     private var _flusher as Flusher?;
 
+    // One-shot, so backing out of Settings does not immediately reopen it.
+    // Resets on app start, which is the point - see onShow.
+    private var _offeredSetup as Boolean = false;
+
     public function initialize(pending as PropertyValueType) {
         View.initialize();
         setBackgroundResult(pending);
+    }
+
+    //! Go straight to Settings while the app is unconfigured.
+    //!
+    //! Entering text via the phone ends the app and drops you back to the
+    //! watch face, so after setting the first of the two values you would
+    //! otherwise have to reopen the app and navigate in again for the
+    //! second. Resuming into Settings turns that into: reopen, set the
+    //! other one, done.
+    //!
+    //! Deliberately not a modal wizard - Back still reaches the main view,
+    //! because capturing before configuring is legitimate. Notes queue and
+    //! go out once the settings exist.
+    public function onShow() as Void {
+        if (!_offeredSetup && !Config.isConfigured()) {
+            _offeredSetup = true;
+            var m = new $.SettingsMenu();
+            WatchUi.pushView(m, new $.SettingsMenuDelegate(m), WatchUi.SLIDE_LEFT);
+        }
     }
 
     public function onUpdate(dc as Dc) as Void {
