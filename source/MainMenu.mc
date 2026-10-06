@@ -37,7 +37,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
         var id = menuItem.getId() as String;
 
         if (id.equals("flush")) {
-            WatchUi.popView(WatchUi.SLIDE_DOWN);
+            WatchUi.popView(WatchUi.SLIDE_RIGHT);
             _view.flushNow();
 
         } else if (id.equals("queue")) {
@@ -50,7 +50,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
 
         } else if (id.equals("import")) {
             Config.importFromPhone();
-            WatchUi.popView(WatchUi.SLIDE_DOWN);
+            WatchUi.popView(WatchUi.SLIDE_RIGHT);
             _view.setStatus("imported from phone");
 
         } else if (id.equals("clear")) {

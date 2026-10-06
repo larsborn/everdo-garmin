@@ -53,7 +53,7 @@ class QueueMenuDelegate extends WatchUi.Menu2InputDelegate {
         _menu.rebuild();
         _view.setStatus("item deleted");
         if (Outbox.depth() == 0) {
-            WatchUi.popView(WatchUi.SLIDE_DOWN);
+            WatchUi.popView(WatchUi.SLIDE_RIGHT);
         } else {
             WatchUi.requestUpdate();
         }

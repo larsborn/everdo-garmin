@@ -26,18 +26,28 @@ class EverdoDelegate extends WatchUi.BehaviorDelegate {
         return openMenu();
     }
 
-    //! Swipe up opens it too. venux1 exposes only two key behaviours,
+    //! Swipe left - the primary way in, and the one that matches the rest
+    //! of the watch: the device binds swipeRight to Back and leaves
+    //! swipeLeft unbound, so left-to-go-deeper pairs with right-to-return.
+    public function onSwipe(evt as SwipeEvent) as Boolean {
+        if (evt.getDirection() == WatchUi.SWIPE_LEFT) {
+            return openMenu();
+        }
+        return false;
+    }
+
+    //! Swipe up still works. venux1 exposes only two key behaviours,
     //! onSelect and onBack - there is no physical MENU key - so onMenu()
     //! depends on a long-press mapping that may or may not exist on this
     //! firmware. A menu you cannot reach is a menu that does not exist, and
-    //! settings live behind it, so bind a gesture that definitely fires.
+    //! settings live behind it, so keep a second route.
     public function onNextPage() as Boolean {
         return openMenu();
     }
 
     private function openMenu() as Boolean {
         WatchUi.pushView(new $.MainMenu(), new $.MainMenuDelegate(_view),
-            WatchUi.SLIDE_UP);
+            WatchUi.SLIDE_LEFT);
         return true;
     }
 
