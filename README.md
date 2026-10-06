@@ -15,6 +15,7 @@ queues locally and sends later rather than losing it.
   one, so Everdo cannot be addressed directly. **See [SETUP.md](SETUP.md)**
   for three ways to do this, including one that needs no domain of your own.
   Plain HTTP will not work either.
+- Not affiliated with the developers of Everdo.
 - A phone in Bluetooth range running Garmin Connect; that is what carries
   the request.
 
