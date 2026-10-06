@@ -58,7 +58,10 @@ Api, Config and Errors reference `WatchUi` nowhere. Nothing to reduce.
       goes out later unattended
 - [ ] Bad-key test: confirm "check API key" rather than a silent failure
 - [x] Screenshots: store/01..06, 448x486, cropped to the screen
-- [ ] Store listing text (draft below)
+- [x] Store listing text (below)
+- [x] Developer key backed up off-machine and hash-verified
+- Public contact: `garmin-development@wallenborn.net` - shown publicly
+      on the listing, deliberately not a personal address
 
 ## Beta first, and the appID it costs
 
@@ -125,9 +128,15 @@ icon, description, screenshots and permissions all resolved, listed at
 raising with support before the public release, while an appID change is
 still free.
 
-## BACK UP THE DEVELOPER KEY
+## The developer key
 
-`P:\Garmin\keys\developer_key.der` - off this machine, today.
+In use:     `P:\Garmin\keys\developer_key.der`
+Backed up:  `D:\Sync\Nextcloud\Keys\GarminKeys\` (verified byte-identical,
+md5 `e03d0d24b1cfa0d3d25263f4e4f3058f`)
+
+Verify the hash, not merely that a file exists - a backup of the wrong
+key is worse than none, because it only surfaces when an update is
+rejected, and by then there is no recovery.
 
 There is **no recovery**. The key is what ties every future update to this
 listing. Lose it and the app can never be updated; the only remedy is a new
