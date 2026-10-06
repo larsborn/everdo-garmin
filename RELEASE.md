@@ -89,8 +89,8 @@ undone:
 | appID | Used for |
 | --- | --- |
 | `4ff5794372e4b497de2180ec12e582f2` | sideload during development, and beta 1 |
-| `1eb0645359c890ab0dcc0c49a8a2f5e0` | **beta 2** - clean room, never sideloaded |
-| (to generate) | public release |
+| `1eb0645359c890ab0dcc0c49a8a2f5e0` | beta 2 - clean room, never sideloaded |
+| `4d358e3d5adc6de2720b297381d8b61b` | **public release 1.0.0 — FINAL, never change this** |
 
 Beta 2 exists because beta 1 shared its appID with the sideloaded builds.
 The Connect IQ phone app caches metadata per appID, so the two installs
