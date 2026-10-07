@@ -1,5 +1,16 @@
 # Releasing to the Connect IQ Store
 
+**1.0.0 submitted to the public store on 2026-10-07**, appID
+`4d358e3d5adc6de2720b297381d8b61b`. Awaiting review (Garmin quote up to
+~3 days).
+
+Still open after approval:
+- install from the public store and confirm a clean first run
+  ("Setup needed", empty queue) on an appID the watch has never seen
+- remove the two beta listings, which are now dead
+- raise the "Signature check failed" upload warning with developer support
+
+
 ## Device coverage — done
 
 62 devices, selected mechanically from the SDK's own device profiles rather
